@@ -1,0 +1,6 @@
+---
+# defaults file for webserver
+host_name: "Terraform-Ansible-WebServer"
+env_name: "Development"
+
+

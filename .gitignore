@@ -1,0 +1,67 @@
+# Terraform local working directories
+**/.terraform/*
+
+# Terraform state (including separate backend-bootstrap state)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+*.tfplan
+*.tfplan.*
+crash.log
+crash.*.log
+
+# Local/secret Terraform inputs
+*.tfvars
+*.tfvars.json
+*.auto.tfvars
+*.auto.tfvars.json
+*.tfbackend
+*.tfbackend.json
+!*.tfvars.example
+!*.tfvars.json.example
+
+# CLI overrides and private configuration
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+.terraformrc
+terraform.rc
+
+# Ansible generated inventory and local secrets
+ansible/inventory.generated.ini
+*.retry
+*.vault-pass
+*.vault-password
+.vault_pass
+.vault_password
+vault-password.txt
+vault_pass.txt
+
+# SSH keys, credential files, environment files
+*.pem
+*.key
+id_rsa
+id_ed25519
+.env
+.env.*
+!.env.example
+.aws/
+credentials
+
+# Local virtual environments, cache, editor and OS files
+ansible-venv/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Intentionally DO NOT ignore .terraform.lock.hcl
+# Encrypted Ansible Vault files may be committed after review.
+

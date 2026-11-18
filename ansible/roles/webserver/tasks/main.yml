@@ -1,0 +1,37 @@
+---
+- name: Install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+
+- name: Make sure a nginx is running
+  ansible.builtin.systemd_service:
+    state: started
+    name: nginx
+    enabled: true
+- name: transfer the redered jinja2 html
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /usr/share/nginx/html/index.html
+    mode: '0644'
+
+- name: Delpoy the configuration
+  ansible.builtin.copy:
+    src: managed-headers.conf
+    dest: /etc/nginx/default.d/managed-headers.conf
+    mode: '0644'
+  notify:
+    - reload nginx
+- name: validate the nginx files
+  ansible.builtin.command: nginx -t
+  changed_when: false
+- name:  include vars from secret.yml
+  ansible.builtin.include_vars:
+    file: secrets.yml
+    name: secrets
+- name: check if the var was included or not
+  ansible.builtin.assert:
+    that:
+      - secrets['m-password'] is defined
+      - secrets['m-password'] | length > 0      
+
